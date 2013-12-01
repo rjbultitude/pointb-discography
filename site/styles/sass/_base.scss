@@ -1,0 +1,84 @@
+
+// Base Variables
+
+// $author                       Zone
+// $url                          http://www.thisiszone.com/
+// $copyright                    Copyright (c) 2012, thisiszone.com. All rights reserved.
+// $version                      1.0
+
+
+// -------------------------------------------------------------------------------- 
+// ---------- Colours -------------------------------------------------------------
+// -------------------------------------------------------------------------------- 
+
+$color-shift-amount:            15%;
+
+// Colour palette ----------------------------------------------------------------
+
+$color-orange:                  #F95531;
+$color-red:                     #CC311D;
+$color-blue:                    #83D4F6;
+$color-teal:                    #3BCBB7;
+$color-dark-teal:               #29998A;
+$color-dark-teal-t:             darken($color-teal, 38%);
+
+//greys                         
+$color-grey-vl:                 #F2F3F5;
+$color-grey-l:                  #D5D9DF;
+$color-grey-m:                  #47505E;
+$color-grey-d:                  #404754;
+$color-grey-vd:                 #313741;
+$color-black:                   #2A2F37;
+
+// Colour Context ----------------------------------------------------------------
+
+$color-text:                    $color-black;
+$color-heading:                 $color-text;
+$color-link:                    $color-red;
+$color-link-hover:              darken($color-red, $color-shift-amount);
+$color-link-visited:            $color-link;
+
+
+// -------------------------------------------------------------------------------- 
+// ---------- Fonts ---------------------------------------------------------------
+// -------------------------------------------------------------------------------- 
+
+$font-copy:                     "source-sans-pro", arial, sans-serif;
+$font-heading:                  "museo-sans-rounded", 'Gill Sans', 'Helvetica Neue', Arial, sans-serif;
+
+$font-size:                     16px;
+//$font-size:                   18px;       //This would match the designs
+
+
+// -------------------------------------------------------------------------------- 
+// ---------- Spacing -------------------------------------------------------------
+// -------------------------------------------------------------------------------- 
+
+$spacing:                       2.625em;
+$spacing-vertical:              3.125em;
+$spacing-vertical-small:        1.875em;
+$max-width:                     960px;
+$form-border:                   0.313em;
+$site-padding:                  2.500em;
+
+// -------------------------------------------------------------------------------- 
+// ---------- Break points --------------------------------------------------------
+// -------------------------------------------------------------------------------- 
+
+$bp-small:                       20.000em; //320px;
+$bp-medium:                      48.000em; //768px;
+$bp-large:                       81.250em; //1300px;
+
+// -------------------------------------------------------------------------------- 
+// ---------- Blocks --------------------------------------------------------------
+// --------------------------------------------------------------------------------
+
+%orange-block {
+    background: $color-orange;
+    color:white;
+}
+
+%flow-in-grid {
+  display: inline;
+  float: left;
+}

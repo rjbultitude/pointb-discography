@@ -1,0 +1,253 @@
+/**
+* Vendor Prefixing Mixins -- part of the Utilities Namespace
+*
+* $author   Zone
+* $copyright  Copyright (c) 2012, zonecontent@mixin com@mixin  All rights reserved@mixin 
+* $version    0@mixin0.1
+*/
+
+/// DO NOT TOUCH !
+/// NB - This file should not need to be edited during development@mixin 
+//=================================================================
+
+/* LAYOUT
+----------------------------------------------------------------------------- */
+
+
+/* Nice Box Model */
+@mixin box-model() {
+  /* These styles force the IE6 box model - e@mixin g@mixin  padding does not affect width */
+  box-sizing :  border-box; /* css3 rec */
+  -moz-box-sizing :  border-box; /* ff2 */
+  -ms-box-sizing :  border-box; /* ie8 */
+  -webkit-box-sizing :  border-box; /* safari3 */
+  -khtml-box-sizing :  border-box; /* konqueror */
+}
+@mixin box-model-reset() {
+  /* These styles force the IE6 box model - e@mixin g@mixin  padding does not affect width */
+  box-sizing :  content-box; /* css3 rec */
+  -moz-box-sizing :  content-box; /* ff2 */
+  -ms-box-sizing :  content-box; /* ie8 */
+  -webkit-box-sizing :  content-box; /* safari3 */
+  -khtml-box-sizing :  content-box; /* konqueror */
+}
+/* IE7 Supports Inline Block! */
+@mixin inline-block(){
+  display : inline;
+  display :  -moz-inline-stack;
+  display :  inline-block;
+  vertical-align :  top;
+  zoom :  1;
+  *display :  inline; /* for IE 7*/
+}
+
+
+
+/* AESTHETIC
+----------------------------------------------------------------------------- */
+
+/* Border Radius */
+@mixin border-radius($radius : 9px) {
+  -webkit-border-radius : $radius;
+  -moz-border-radius : $radius;
+  border-radius : $radius;    
+}
+
+/* Box Shadow */
+@mixin box-shadow-single(
+  $color : rgba(0,0,0,0.3),  
+  $horizontalOffset : 0, 
+  $verticalOffset : 0,  
+  $blurDistance : 9px, 
+  $spread : 1px
+  ) {
+  -webkit-box-shadow : $horizontalOffset $verticalOffset $blurDistance $spread $color;
+  -moz-box-shadow :  $horizontalOffset $verticalOffset $blurDistance $spread $color;
+  box-shadow :  $horizontalOffset $verticalOffset $blurDistance $spread $color;
+} 
+
+@mixin box-shadow($props: "0 0 9px 1px rgba(0,0,0,0.15)"){
+  -webkit-box-shadow : $props;
+  -moz-box-shadow :  $props;
+  box-shadow :  $props;
+}
+
+@mixin box-shadow-reset() {
+  -webkit-box-shadow : none;
+  -moz-box-shadow :  none;
+  box-shadow :  none;
+} 
+
+@mixin box-shadow-inset(
+  $color : rgba(0,0,0,0.3),   
+  $horizontalOffset : 0, 
+  $verticalOffset : 0,  
+  $blurDistance : 9px, 
+  $spread : 1px
+  ) {
+  -webkit-box-shadow : inset $horizontalOffset $verticalOffset $blurDistance $spread $color;
+  -moz-box-shadow : inset $horizontalOffset $verticalOffset $blurDistance $spread $color;
+  box-shadow : inset $horizontalOffset $verticalOffset $blurDistance $spread $color;
+}
+
+/* Gradient */
+@mixin linear-gradient(
+  $start-color :  #1f67b2,
+  $end-color :  #edf4fc,
+  $start-dist :  0%,
+  $end-dist :  100%,
+  $startpos :  top
+  ) {
+  background :  $start-color;
+  background :  -moz-linear-gradient($startpos,  $start-color $start-dist, $end-color $end-dist);
+  background :  -webkit-linear-gradient($startpos,  $start-color $start-dist,$end-color $end-dist);
+  background :  -o-linear-gradient($startpos,  $start-color $start-dist,$end-color $end-dist);
+  background :  -ms-linear-gradient($startpos,  $start-color $start-dist,$end-color $end-dist);
+  background :  linear-gradient($startpos,  $start-color $start-dist,$end-color $end-dist);
+}
+
+
+/* Opacity */
+@mixin opacity($opacity : 0.35) {
+  -moz-opacity : $opacity;
+  -khtml-opacity : $opacity;
+  -webkit-opacity : $opacity;
+  opacity : $opacity;
+}
+
+/* Text Shadow */
+@mixin text-shadow($arguments : 0px 1px 1px rgba(0, 0, 0,0.5)) {
+  text-shadow : $arguments;
+}
+
+@mixin stretch-bg($type: contain, $height: auto) {
+  -webkit-background-size: $type, $height;
+  -moz-background-size: $type, $height;
+  -o-background-size: $type, $height;
+  background-size: $type, $height;
+}
+
+@mixin placeholder-color($color){
+
+  ::-webkit-input-placeholder { /* WebKit browsers */
+    color:    $color;
+  }
+
+  :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    $color;
+  }
+
+  ::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    $color;
+  }
+
+  :-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    $color;
+  }
+
+}
+
+/* TRANSFORMS
+----------------------------------------------------------------------------- */
+@mixin rotate($deg :  30deg) {
+  transform :  rotate($deg);
+  -ms-transform :  rotate($deg); /* IE 9 */
+  -webkit-transform :  rotate($deg); /* Safari and Chrome */
+  -o-transform :  rotate($deg); /* Opera */
+  -moz-transform :  rotate($deg); /* Firefox */
+}
+
+@mixin translate($x : 0, $y : 0, $z : 0) {
+  -webkit-transform: translate3d($x,$y,$z);
+  -moz-transform: translate3d($x,$y,$z);
+  transform: translate3d($x,$y,$z);
+}
+
+@mixin animation($animation : none, $props: 1s ease 0 1 normal) {
+
+  //props: duration easing delay interations direction
+
+  -moz-animation: $animation $props; /* Firefox */
+  -webkit-animation: $animation $props; /* Safari and Chrome */
+  -o-animation: $animation $props; /* Opera */
+  
+  animation: $animation $props;
+}
+
+/* TRANSITIONS
+----------------------------------------------------------------------------- */
+
+@mixin cubic-bezier-transition(
+  $time : 150ms,
+  $props : all,
+  $delay: 0
+  ) {
+
+  @include transitions($time, $props, cubic-bezier(0.5, 0, 0.5, 1), $delay);
+
+}
+
+
+@mixin transitions(
+  $time : 150ms,
+  $props : all,
+  $easing : ease,
+  $delay : 0
+  ) {
+  -webkit-transition-property : $props;
+  -webkit-transition-duration : $time;
+  -webkit-transition-timing-function : $easing;
+  -webkit-transition-delay:$delay;
+
+  -moz-transition-property : $props;
+  -moz-transition-duration : $time;
+  -moz-transition-timing-function : $easing;
+  -moz-transition-delay:$delay;
+
+  -o-transition-property : $props;
+  -o-transition-duration : $time;
+  -o-transition-timing-function : $easing;
+  -o-transition-delay:$delay;
+
+  transition-property : $props;
+  transition-duration : $time;
+  transition-timing-function : $easing;
+  transition-delay:$delay;
+}
+
+
+@mixin no-transition {
+  -webkit-transition : none;
+  -moz-transition : none;
+  -o-transition : none;
+  transition : none;
+}
+
+@mixin transform-scale(
+  $size : 0.85
+  ){
+  -moz-transform :  scale($size);
+  -webkit-transform :  scale($size);
+  -o-transform :  scale($size);
+  -ms-transform :  scale($size);
+  transform :  scale($size);
+}
+
+@mixin transform-reset(
+  $size : 0.85
+  ){
+  -moz-transform :  none;
+  -webkit-transform :  none;
+  -o-transform :  none;
+  -ms-transform :  none;
+  transform :  none;
+}
+
+
+@mixin flicker-fix{
+  -moz-transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}

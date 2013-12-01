@@ -1,0 +1,4 @@
+.mask {
+    background-color: #000000; 
+    @include opacity_no_inherit_grey(0.5);
+}

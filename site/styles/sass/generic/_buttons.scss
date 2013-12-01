@@ -1,0 +1,22 @@
+
+button[role="button"] {
+    @include inline-block;
+    & > .icon {
+        //
+    }
+    & > .text {
+        //text styles
+    }
+    &:hover {
+        //
+    }
+}
+
+//Basic control styles
+[role="button"][rel="prev"],
+[role="button"][rel="next"] {
+    
+    & .text {
+    
+    }
+}

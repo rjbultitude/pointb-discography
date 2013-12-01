@@ -1,0 +1,16 @@
+//Design kit
+.design-kit .section {
+  margin: $spacing*2 0;
+}
+
+.child:first-child {
+    background: black;
+    display:block;
+    height: 20px;
+}
+
+.child:last-child {
+    background: white;
+    display:block;
+    height: 20px;
+}
