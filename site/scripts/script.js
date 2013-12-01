@@ -173,11 +173,13 @@ svg.selectAll("rect").remove();
  //    rectangle.transition().delay(0).duration(500).attr("y", function(d) {return rscale(d.format_number);});
  //    d3.select(".infobox").style("opacity", "0");
  // })
+ .transition()
+ .delay(0)
+ .duration(3000)
  .attr("x", function(d) {return xscale(d.Year);})
- .attr("y", function(d) {return yscale(5);})
- .attr("height", 100)
- .attr("width", 200)
- .transition().delay(0).duration(3000)
+ .attr("y", function(d) {return yscale(d.format_number);})
+ .attr("height", function(d) {return xscale(d.Year);})
+ .attr("width", 50)
  .attr("fill", function(d) {return color_format(d.format);})
 
 
