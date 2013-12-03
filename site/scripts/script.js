@@ -11,9 +11,9 @@ var allYears = [];
 var numberYears = null;
 
 var formatxAxis = d3.format('.0f');
-var w = 1200,
+var w = 980,
     h = 800,
-    padding = 70;
+    padding = 100;
 var keyWidth = 960,
     keyHeight = 100;
 var color_format = d3.scale.ordinal().domain(allFormats).range(allColours);
@@ -62,6 +62,7 @@ function get_years(){
       }
   }
   numberYears = allYears.length;
+  console.log(numberYears);
   set_scales();
 }
 
@@ -179,7 +180,7 @@ svg.selectAll("rect").remove();
  .attr("x", function(d) {return xscale(d.Year);})
  .attr("y", 0)
  .attr("height", function(d) {return xscale(d.Year);})
- .attr("width", (w / numberYears) - 5)
+ .attr("width", (w - padding*2) / numberYears)
  .attr("fill", function(d) {return color_format(d.format);})
 
 

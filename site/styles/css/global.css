@@ -585,22 +585,22 @@ body {
 
 #header,
 #footer,
-#main-content {
+#main {
   display: block;
   margin: 0 auto;
   zoom: 1; }
   #header:before, #header:after,
   #footer:before,
   #footer:after,
-  #main-content:before,
-  #main-content:after {
+  #main:before,
+  #main:after {
     content: "\0020";
     display: block;
     height: 0;
     overflow: hidden; }
   #header:after,
   #footer:after,
-  #main-content:after {
+  #main:after {
     clear: both; }
 
 #header a {
@@ -624,7 +624,7 @@ body {
     margin-bottom: 0; } }
 
 .inner-wrapper {
-  max-width: 960px;
+  max-width: 1200px;
   margin: 0 auto;
   zoom: 1; }
   .inner-wrapper:before, .inner-wrapper:after {
@@ -676,11 +676,19 @@ body {
 /* -------------------------------------------------------------------------------- */
 #footer {
   background: #202c38;
-  color: white; }
+  color: white;
+  padding: 2.625em 0;
+  position: fixed;
+  width: 100%;
+  bottom: 0px; }
 
 /* -------------------------------------------------------------------------------- */
 /* ---------- Initialize ---------------------------------------------------------- */
 /* -------------------------------------------------------------------------------- */
+.search-form input[type="submit"] {
+  background: white;
+  padding: 0.65625em 1.3125em; }
+
 /* -------------------------------------------------------------------------------- */
 /* ---------- Interactions -------------------------------------------------------- */
 /* -------------------------------------------------------------------------------- */
