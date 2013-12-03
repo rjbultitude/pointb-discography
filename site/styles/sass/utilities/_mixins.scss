@@ -109,8 +109,7 @@
 /* -------------------------------------------------------------------------------- */
 
 @mixin standard-transistion {
-    @include transition-timing-function(ceaser($easeInOutCubic));
-    @include transition-duration(0.5s);
+    //
 }
 
 /* -------------------------------------------------------------------------------- */

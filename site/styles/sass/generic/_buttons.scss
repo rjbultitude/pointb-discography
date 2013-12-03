@@ -1,6 +1,6 @@
 
 button[role="button"] {
-    @include inline-block;
+    display: inline-block;
     & > .icon {
         //
     }

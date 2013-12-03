@@ -3,10 +3,12 @@
 //Add new propeties to data
 //Create variables for format
 //Use ordinal scape to map colours to data
-discog_data["allFormats"] = [];
-discog_data["formatNumbers"] = [];
-discog_data["allColours"] = ["#cf6314","#3f9ada","#96c434","#79bec0","#de92ba","#4167de","#d6dc1c","#d2ae41","#8764a8"];
-discog_data["allYears"] = [];
+
+var allFormats = [];
+var formatNumbers = [];
+var allColours = ["#C16620","#E8A54E","#385559","#202C38","#A58576"];
+var allYears = [];
+var numberYears = null;
 
 var formatxAxis = d3.format('.0f');
 var w = 1200,
@@ -14,7 +16,7 @@ var w = 1200,
     padding = 70;
 var keyWidth = 960,
     keyHeight = 100;
-var color_format = d3.scale.ordinal().domain(discog_data.allFormats).range(discog_data.allColours);
+var color_format = d3.scale.ordinal().domain(allFormats).range(allColours);
 
 var xscale = null;
 var yscale = null;
@@ -23,10 +25,10 @@ var yaxis = null;
 
 function set_scales() {
   xscale = d3.scale.linear().domain([d3.min(discog_data, function(d){return d.Year}), d3.max(discog_data, function(d){return d.Year})]).rangeRound([padding,(w)-padding]);
-  yscale = d3.scale.linear().domain([d3.min(discog_data.formatNumbers, function(d){return d}), d3.max(discog_data.formatNumbers, function(d){return d})]).rangeRound([(h)-padding,padding]);
-  xaxis = d3.svg.axis().scale(xscale).orient("bottom").tickFormat(formatxAxis).ticks(discog_data.allYears.length);
-  yaxis = d3.svg.axis().scale(yscale).orient("left").tickFormat(formatxAxis).ticks(discog_data.allFormats.length);
-  console.log(discog_data.formatNumbers);
+  yscale = d3.scale.linear().domain([d3.min(formatNumbers, function(d){return d}), d3.max(formatNumbers, function(d){return d})]).rangeRound([(h)-padding,padding]);
+  xaxis = d3.svg.axis().scale(xscale).orient("bottom").tickFormat(formatxAxis).ticks(allYears.length);
+  yaxis = d3.svg.axis().scale(yscale).orient("left").tickFormat(function() { return allFormats});
+  console.log(formatNumbers);
 
   createSVG();
 }
@@ -36,32 +38,30 @@ var svg;
 //get unique Format Names
 function get_format_names (){
   for(var i = 0; i < discog_data.length; i++) {
-        if (discog_data.allFormats.indexOf( discog_data[i]['format'] ) === -1) {
-         discog_data.allFormats.push(discog_data[i]['format']);
+        if (allFormats.indexOf( discog_data[i]['format'] ) === -1) {
+         allFormats.push(discog_data[i]['format']);
       }
   }
-  console.log(discog_data.allFormats);
+  console.log(allFormats);
   format_number();
 }
 
 //Give formats a number using the index
 function format_number () {
-  for(var i = 0; i < discog_data.allFormats.length; i++) {
-    discog_data.formatNumbers.push(i + 1);
+  for(var i = 0; i < allFormats.length; i++) {
+    formatNumbers.push(i + 1);
   }
-  console.log(discog_data.formatNumbers);
   get_years();
 }
 
 //Get unique years
 function get_years(){
   for(var i = 0; i < discog_data.length; i++) {
-        if (discog_data.allYears.indexOf( discog_data[i]['Year'] ) === -1) {
-         discog_data.allYears.push(discog_data[i]['Year']);
+        if (allYears.indexOf( discog_data[i]['Year'] ) === -1) {
+         allYears.push(discog_data[i]['Year']);
       }
   }
-  console.log(discog_data.allYears.length);
-  console.log(discog_data);
+  numberYears = allYears.length;
   set_scales();
 }
 
@@ -74,7 +74,7 @@ var init = function() {
   hideNoResults();
 
   // set up search autocomplete
- $("#category-search").autocomplete({source: discog_data.allFormats});
+ $("#category-search").autocomplete({source: allFormats});
  $('#search-submit').on("click", function(event){
     event.preventDefault();
     var searchVal = $("#category-search").val();
@@ -97,10 +97,10 @@ function initReset() {
 };
 
 function createKey() {
-  for (var i = 0; i < discog_data.allColours.length; i++) {
+  for (var i = 0; i < allColours.length; i++) {
   //for (var i = allColours.length - 1; i >= 0; i--) {
-    $('#key-list').append('<dd style="background-color:' +  discog_data.allColours[i] + '"">&nbsp</dd>');
-    $('#key-list').append('<dt>' +  discog_data.allFormats[i] + '</dt>');
+    $('#key-list').append('<dd style="background-color:' +  allColours[i] + '"">&nbsp</dd>');
+    $('#key-list').append('<dt>' +  allFormats[i] + '</dt>');
   };
 };
 
@@ -177,9 +177,9 @@ svg.selectAll("rect").remove();
  .delay(0)
  .duration(3000)
  .attr("x", function(d) {return xscale(d.Year);})
- .attr("y", function(d) {return yscale(d.format_number);})
+ .attr("y", 0)
  .attr("height", function(d) {return xscale(d.Year);})
- .attr("width", 50)
+ .attr("width", (w / numberYears) - 5)
  .attr("fill", function(d) {return color_format(d.format);})
 
 
