@@ -1,0 +1,16 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Richard Bultitude -- Designer/Devloper -- twitter.com/pointbmusic
+
+# THANKS
+
+    <name>
+
+# TECHNOLOGY COLOPHON
+
+    HTML5, CSS3, SASS, Icon Font
+    jQuery, Modernizr
+    Grunt - for modules see package.json
