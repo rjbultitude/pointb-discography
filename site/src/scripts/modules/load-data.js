@@ -10,12 +10,10 @@
  * $notes        Notes
  */
 
-define(function() {
+define(['createDrawGraph'], function(createDrawGraph) {
 		'use strict';
 
 		var loadDataModule = {
-
-			originalData: [],
 
 			getData: function getDataFn() {
 				$.getJSON('/data/discog-data.json',
@@ -27,22 +25,21 @@ define(function() {
 
 			getDataAjax: function getDataAjaxFn() {
 				$.ajax({
-					type: 'POST',
+					type: 'GET',
 					url: '/data/discog-data.json',
 					dataType: 'json',
 					success: function(jsonData) {
-						console.log('this is the json', jsonData);
-						loadDataModule.originalData = jsonData;
+						createDrawGraph.getData(jsonData);
 					},
 				});
 			},
 
 			init: function initFn() {
-
 				loadDataModule.getDataAjax();
-				console.log('load loadDataModule.originalData', loadDataModule.originalData);
 			}
 		};
+
+
 
 		return loadDataModule;
 

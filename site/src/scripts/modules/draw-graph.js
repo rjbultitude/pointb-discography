@@ -15,54 +15,72 @@ var requireLocalized = requireLocalized || {};
 define(['debug', 'd3', 'loadData'], function(debug, d3, loadDataModule) {
 	'use strict';
 
-	debug.log('debug is being used in the draw graph module');
+	//Variables
+	var discogData = [];
+	var allFormats = [];
+	var allColours = ['#C16620', '#E8A54E', '#385559', '#202C38', '#A58576'];
+	var allYears = [];
+	var allReleasesTotal = null;
+	var numberYears = null;
+	var formatxAxis = null;
+	var w = 980;
+	var h = 800;
+	var padding = 100;
+	var colorFormat = null;
+	var xscale = null;
+	var yscale = null;
+	var xaxis = null;
+	var yaxis = null;
+	var svg = null;
 
 	var createDrawGraph = {
 
-		//Variables
-		appVariables: {
-			allFormats: [],
-			allColours: ['#C16620', '#E8A54E', '#385559', '#202C38', '#A58576'],
-			allYears: [],
-			allReleasesTotal: null,
-			numberYears: null,
-			formatxAxis: null,
-			w: 980,
-			h: 800,
-			padding: 100,
-			colorFormat: null,
-			xscale: null,
-			yscale: null,
-			xaxis: null,
-			yaxis: null,
-			svg: null
+		getData: function getDataFn(data) {
+			discogData = data;
+			createDrawGraph.setColorFormat();
+			createDrawGraph.calcReleases();
+			createDrawGraph.formatXAxis();
+			createDrawGraph.getYears();
 		},
 
 		setColorFormat: function setColorFormat() {
-			createDrawGraph.appVariables.colorFormat = d3.scale.ordinal().domain(createDrawGraph.appVariables.allFormats).range(createDrawGraph.appVariables.allColours);
+			colorFormat = d3.scale.ordinal().domain(allFormats).range(allColours);
 		},
 
 		calcReleases: function calcReleasesFn() {
-			createDrawGraph.appVariables.allReleasesTotal = loadDataModule.originalData.length;
+			allReleasesTotal = discogData.length;
+			debug.log('allReleasesTotal', allReleasesTotal);
 		},
 
 		formatXAxis: function formatXAxisFn() {
-			createDrawGraph.appVariables.formatxAxis = d3.format('.0f');
+			formatxAxis = d3.format('.0f');
+		},
+
+		//Get unique years
+		getYears: function getYearsFn(){
+			for(var i = 0; i < discogData.length; i++) {
+				if (allYears.indexOf( discogData[i]['Year'] ) === -1) {
+					allYears.push(discogData[i]['Year']);
+				}
+			}
+			numberYears = allYears.length;
+			console.log('number years', numberYears);
+			createDrawGraph.setScales();
 		},
 
 		setScales: function setScalesFn() {
-			createDrawGraph.appVariables.xscale = d3.scale.linear().domain([d3.min(loadDataModule.originalData, function(d) {
+			xscale = d3.scale.linear().domain([d3.min(discogData, function(d) {
 				return d.Year;
-			}), d3.max(loadDataModule.originalData, function(d) {
+			}), d3.max(discogData, function(d) {
 				return d.Year;
-			})]).rangeRound([createDrawGraph.appVariables.padding, (createDrawGraph.appVariables.w) - createDrawGraph.appVariables.padding]);
-			createDrawGraph.appVariables.yscale = d3.scale.linear().domain([d3.min(createDrawGraph.appVariables.allReleasesTotal, function(d) {
+			})]).rangeRound([padding, (w) - padding]);
+			yscale = d3.scale.linear().domain([d3.min(allReleasesTotal, function(d) {
 				return d;
-			}), d3.max(createDrawGraph.appVariables.allReleasesTotal, function(d) {
+			}), d3.max(allReleasesTotal, function(d) {
 				return d;
-			})]).rangeRound([(createDrawGraph.appVariables.h) - createDrawGraph.appVariables.padding, createDrawGraph.appVariables.padding]);
-			createDrawGraph.appVariables.xaxis = d3.svg.axis().ticks(createDrawGraph.appVariables.allYears.length - 1).scale(createDrawGraph.appVariables.xscale).orient('bottom').tickFormat(createDrawGraph.appVariables.formatxAxis);
-			createDrawGraph.appVariables.yaxis = d3.svg.axis().tickValues(createDrawGraph.appVariables.allReleasesTotal).scale(createDrawGraph.appVariables.yscale).orient('left');
+			})]).rangeRound([(h) - padding, padding]);
+			xaxis = d3.svg.axis().ticks(allYears.length - 1).scale(xscale).orient('bottom').tickFormat(formatxAxis);
+			yaxis = d3.svg.axis().tickValues(allReleasesTotal).scale(yscale).orient('left');
 
 			//call function
 			createDrawGraph.createSVG();
@@ -70,32 +88,34 @@ define(['debug', 'd3', 'loadData'], function(debug, d3, loadDataModule) {
 
 		createSVG: function createSVGFn() {
 			// create svg canvas
-			createDrawGraph.appVariables.svg = d3.select('#data-output')
+			svg = d3.select('#data-output')
 				.append('svg:svg')
-				.attr('width', createDrawGraph.appVariables.w)
-				.attr('height', createDrawGraph.appVariables.h);
+				.attr('width', w)
+				.attr('height', h);
 			//call function
 			createDrawGraph.createAxis();
 		},
 
 		createAxis: function createAxisFn() {
-			createDrawGraph.appVariables.svg.append('g').attr('class', 'axis').attr('transform', 'translate(0,' + (createDrawGraph.appVariables.h - createDrawGraph.appVariables.padding) + ')').call(createDrawGraph.appVariables.xaxis);
-			createDrawGraph.appVariables.svg.append('g').attr('class', 'axis').attr('transform', 'translate(' + createDrawGraph.appVariables.padding + ', 0)').call(createDrawGraph.appVariables.yaxis);
+			svg.append('g').attr('class', 'axis').attr('transform', 'translate(0,' + (h - padding) + ')').call(xaxis);
+			svg.append('g').attr('class', 'axis').attr('transform', 'translate(' + padding + ', 0)').call(yaxis);
 			// add axis labels
-			createDrawGraph.appVariables.svg.append('text').attr('class', 'x-label').attr('text-anchor', 'middle').attr('x', (createDrawGraph.appVariables.w / 2) - 30).attr('y', (createDrawGraph.appVariables.h - createDrawGraph.appVariables.padding / 2) + 10).text('Year');
-			createDrawGraph.appVariables.svg.append('text').attr('class', 'y-label').attr('text-anchor', 'middle').attr('y', (createDrawGraph.appVariables.padding / 2) - 10).attr('x', -createDrawGraph.appVariables.h / 2).attr('transform', 'rotate(-90)').text('Releases');
+			svg.append('text').attr('class', 'x-label').attr('text-anchor', 'middle').attr('x', (w / 2) - 30).attr('y', (h - padding / 2) + 10).text('Year');
+			svg.append('text').attr('class', 'y-label').attr('text-anchor', 'middle').attr('y', (padding / 2) - 10).attr('x', -h / 2).attr('transform', 'rotate(-90)').text('Releases');
 
 			//call function
-			createDrawGraph.drawGraph(loadDataModule.originalData);
+			createDrawGraph.drawGraph(discogData);
 		},
 
 		drawGraph: function drawGraph(dataObject) {
 
+			debug.log('data for drawing', dataObject);
+
 			//remove any existing rectangles
-			createDrawGraph.appVariables.svg.selectAll('rect').remove();
+			svg.selectAll('rect').remove();
 
 			//bind data to blocks
-			createDrawGraph.appVariables.svg.selectAll('rect')
+			svg.selectAll('rect')
 				.data(dataObject)
 				.enter()
 				.append('rect')
@@ -103,22 +123,19 @@ define(['debug', 'd3', 'loadData'], function(debug, d3, loadDataModule) {
 				.delay(0)
 				.duration(3000)
 				.attr('x', function(d) {
-					return createDrawGraph.appVariables.xscale(d.Year);
+					return xscale(d.Year);
 				})
-				.attr('y', createDrawGraph.appVariables.padding)
-				.attr('height', createDrawGraph.appVariables.allReleasesTotal)
-				.attr('width', (createDrawGraph.appVariables.w - createDrawGraph.appVariables.padding * 4) / createDrawGraph.appVariables.numberYears)
+				.attr('y', padding)
+				.attr('height', allReleasesTotal)
+				.attr('width', (w - padding * 4) / numberYears)
 				.attr('fill', function(d) {
-					return createDrawGraph.appVariables.colorFormat(d.format);
+					return colorFormat(d.format);
 				});
 
 		},
 
 		init: function initFn() {
-			createDrawGraph.setColorFormat();
-			createDrawGraph.calcReleases();
-			createDrawGraph.formatXAxis();
-			createDrawGraph.setScales();
+			createDrawGraph.getData();
 		}
 	};
 

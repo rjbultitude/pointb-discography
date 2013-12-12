@@ -17,13 +17,11 @@ require.config({
 });
 
 // Start the main app logic.
-require(['jquery', 'debug', 'base', 'loadData', 'structureData', 'createDrawGraph'],
-    function($, debug, base, loadDataModule, structureData, createDrawGraph) {
+require(['jquery', 'debug', 'base', 'loadData'],
+    function($, debug, base, loadDataModule) {
         'use strict';
 
         base.init();
         loadDataModule.init();
-        structureData.init();
-        createDrawGraph.init();
     }
 );
