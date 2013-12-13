@@ -59,8 +59,9 @@ define(['debug', 'd3', 'structureData'], function(debug, d3, structureData) {
 		//Get unique years
 		getYears: function getYearsFn(){
 			for(var i = 0; i < discogData.length; i++) {
-				if (allYears.indexOf( discogData[i]['Year'] ) === -1) {
-					allYears.push(discogData[i]['Year']);
+				var myIndex = discogData[i];
+				if (allYears.indexOf( myIndex.Year ) === -1) {
+					allYears.push(myIndex.Year);
 				}
 			}
 			numberYears = allYears.length;

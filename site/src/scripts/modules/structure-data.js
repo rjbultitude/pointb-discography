@@ -18,11 +18,16 @@ define(['debug', 'loadData', 'createDrawGraph'], function(debug, loadDataModule,
 	var structureData = {
 
 		createNewData: function createNewDataFn(jsonData) {
-			var newData = jsonData;
+			var oldData = jsonData;
+			var newData = [];
+			//var firstItem = newData[0];
 
-			var firstItem = newData[0];
+			for (var i in oldData) {
+				newData.push(i.year);
+			}
 
-			createDrawGraph.getData(newData);
+			//swap this for newData when ready
+			createDrawGraph.getData(oldData);
 		}
 	};
 
