@@ -12,7 +12,7 @@
 
 var requireLocalized = requireLocalized || {};
 
-define(['debug', 'd3', 'loadData'], function(debug, d3, loadDataModule) {
+define(['debug', 'd3', 'structureData'], function(debug, d3, structureData) {
 	'use strict';
 
 	//Variables

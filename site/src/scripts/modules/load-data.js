@@ -10,7 +10,7 @@
  * $notes        Notes
  */
 
-define(['createDrawGraph'], function(createDrawGraph) {
+define(['structureData'], function(structureData) {
 		'use strict';
 
 		var loadDataModule = {
@@ -29,7 +29,7 @@ define(['createDrawGraph'], function(createDrawGraph) {
 					url: '/data/discog-data.json',
 					dataType: 'json',
 					success: function(jsonData) {
-						createDrawGraph.getData(jsonData);
+						structureData.createNewData(jsonData);
 					},
 				});
 			},

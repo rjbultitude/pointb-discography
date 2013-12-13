@@ -12,15 +12,17 @@
 
 var requireLocalized = requireLocalized || {};
 
-define(['debug', 'loadData'], function(debug, loadDataModule) {
+define(['debug', 'loadData', 'createDrawGraph'], function(debug, loadDataModule, createDrawGraph) {
 	'use strict';
 
 	var structureData = {
 
-		init: function() {
-			var newData = loadDataModule.originalData;
+		createNewData: function createNewDataFn(jsonData) {
+			var newData = jsonData;
 
 			var firstItem = newData[0];
+
+			createDrawGraph.getData(newData);
 		}
 	};
 
