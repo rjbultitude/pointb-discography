@@ -1,0 +1,125 @@
+/* -------------------------------------------------------------------------------- */
+/* ---------- Clear Floats -------------------------------------------------------- */
+/* -------------------------------------------------------------------------------- */
+
+@mixin clearfix {
+    zoom: 1;
+    &:before, &:after {
+        content: "\0020";
+        display: block;
+        height: 0;
+        overflow: hidden;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+/* -------------------------------------------------------------------------------- */
+/* ---------- Images -------------------------------------------------------------- */
+/* -------------------------------------------------------------------------------- */
+@mixin image-shadow {
+    @include single-box-shadow(rgba(0, 0, 0, 0.2), 0, 3px, 1px, false);
+} 
+
+/* -------------------------------------------------------------------------------- */
+/* ---------- Text ---------------------------------------------------------------- */
+/* -------------------------------------------------------------------------------- */
+
+@mixin hide-text {
+    overflow: hidden;
+    text-indent: 9999px;
+    font-size: 0em;
+    color: transparent;
+}
+
+@mixin unhide-text {
+    overflow: show !important;
+    text-indent: 0 !important;
+    font-size: inherit !important;
+    color: inherit !important;
+}
+
+@mixin prevent_text_breakouts {
+    -ms-word-break: break-all;
+    word-break: break-all;
+    word-break: break-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+}
+
+/* -------------------------------------------------------------------------------- */
+/* ---------- Break points ----- -------------------------------------------------- */
+/* -------------------------------------------------------------------------------- */
+@mixin bp($point) {
+  
+  $bp-one: "(max-width: 600px)";
+  $bp-two: "(max-width: 1250px)";
+
+  @if $point == bp-one {
+    @media #{$bp-one} { @content; }
+  }
+  @else if $point == bp-two {
+    @media #{$bp-one} { @content; }
+  }
+
+}
+
+/* -------------------------------------------------------------------------------- */
+/* ---------- Alignment Trickery -------------------------------------------------- */
+/* -------------------------------------------------------------------------------- */
+
+@mixin match-heights {
+    margin-bottom: -100em !important;
+    padding-bottom: 100em!important;
+}
+
+@mixin table-cell-middle-align {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    margin: 0 auto;
+    float: none;
+    clear: both;
+}
+
+@mixin text_off_screen {
+    text-indent: -9999px;
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
+    // font-size: 0; //Is this necessary?
+    text-align: start;
+}
+
+@mixin el_off_screen {
+    position: absolute;
+    left: -9999em;
+}
+
+@mixin indented-full-width {
+    @include column(10);
+    @include push(1);
+    @include pull(1);
+}
+
+/* -------------------------------------------------------------------------------- */
+/* ---------- Transitions --------------------------------------------------------- */
+/* -------------------------------------------------------------------------------- */
+
+@mixin standard-transistion {
+    //
+}
+
+/* -------------------------------------------------------------------------------- */
+/* ---------- Opactity ------------------------------------------------------------ */
+/* -------------------------------------------------------------------------------- */
+/* Non-inheriting cross browser opacity with grey bg color */
+@mixin opacity_no_inherit_grey($opacity: 0.35) {
+    $opacity_ie: $opacity * 100;
+    background: rgb(55, 52, 52);
+    background: rgba(55, 52, 52, $opacity);
+    -ms-filter: alpha(opacity = $opacity_ie);
+    filter: alpha(opacity = $opacity_ie);
+}

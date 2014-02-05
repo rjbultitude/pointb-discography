@@ -1,0 +1,238 @@
+/**
+* Animation Styles
+*
+* $author       Dominic da Costa @ Zone
+* $email        ddacosta@thisiszone.com
+* $url          http://www.thisiszone.com/
+* $copyright    Copyright (c) 2013, thisiszone.com. All rights reserved.
+* $version      1.0
+*/
+
+/* -------------------------------------------------------------------------- */
+/* ---------- Animation Effects --------------------------------------------- */
+/* -------------------------------------------------------------------------- */
+
+@import "compass/css3/transform";
+
+/* -------------------------------------------------------------------------- */
+/* ---------- Keyframe Animation Mixins ------------------------------------- */
+/* -------------------------------------------------------------------------- */
+
+@mixin keyframes($name) {
+    @-webkit-keyframes #{$name} {
+        @content;
+    }
+
+    @-moz-keyframes #{$name} {
+        @content;
+    }
+
+    @-ms-keyframes #{$name} {
+        @content;
+    }
+
+    @keyframes #{$name} {
+        @content;
+    }
+}
+
+@mixin animate($name, $duration: 1s, $easing: ease, $iterations: 1, $direction: normal) {
+    -moz-animation-name: $name;
+    -moz-animation-duration: $duration;
+    -moz-animation-timing-function: $easing;
+    -moz-animation-iteration-count: $iterations;
+    -moz-animation-direction: $direction;
+    -webkit-animation-name: $name;
+    -webkit-animation-duration: $duration;
+    -webkit-animation-timing-function: $easing;
+    -webkit-animation-iteration-count: $iterations;
+    -webkit-animation-direction: $direction;
+    -o-animation-name: $name;
+    -o-animation-duration: $duration;
+    -o-animation-timing-function: $easing;
+    -o-animation-iteration-count: $iterations;
+    -o-animation-direction: $direction;
+    animation-name: $name;
+    animation-duration: $duration;
+    animation-timing-function: $easing;
+    animation-iteration-count: $iterations;
+    animation-direction: $direction;
+}
+
+/* -------------------------------------------------------------------------- */
+/* ---------- Predefined Animations ----------------------------------------- */
+/* -------------------------------------------------------------------------- */
+
+/* ---------- Init perspective on some of the more complex animations ------- */
+
+.animate--init {
+    @include perspective(1300px);
+}
+
+/* ---------- Fade In ------------------------------------------------------- */
+
+.animate--fade {
+    @include animate(fadeIn, 0.65s, ease, 1, normal);
+}
+
+@include keyframes(fadeIn) {
+    from {
+        @include opacity(0);
+    }
+    to {
+        @include opacity(1);
+    }
+}
+
+
+/* ---------- Rotate ------------------------------------------------------- */
+
+.animate--rotate {
+    @include animate(rotate, 0.65s, ease, 1, normal);
+}
+
+.animate--rotate-reverse {
+    @include animate(rotate, 0.65s, ease, 1, alternate);
+}
+
+@include keyframes(rotate) {
+    from {
+        @include rotate(0deg);
+    }
+    to {
+        @include rotate(45deg);
+    }
+}
+
+
+/* ---------- Move Up ------------------------------------------------------- */
+
+.animate--move {
+    @include animate(moveUp, 0.65s, ease, 1, normal);
+}
+
+@include keyframes(moveUp) {
+    from {
+        @include translateY(200px);
+        @include opacity(0);
+    }
+    to {
+        @include translateY(0);
+        @include opacity(1);
+    }
+}
+
+
+/* ---------- Scale Up ------------------------------------------------------ */
+
+.animate--scale {
+    @include animate(scaleUp, 0.65s, ease-in-out, 1, normal);
+}
+
+@include keyframes(scaleUp) {
+    from {
+        @include scale(0.6);
+        @include opacity(0);
+    }
+    to {
+        @include scale(1);
+        @include opacity(1);
+    }
+}
+
+
+/* ---------- Fall Perspective ---------------------------------------------- */
+
+.animate--fall {
+    @include animate(fall, 0.8s, ease-in-out, 1, normal);
+}
+
+@include keyframes(fall) {
+    from {
+        @include transform-style(preserve-3d);
+        @include transform(translateZ(400px) translateY(300px) rotateX(-90deg));
+    }
+    to {
+        @include transform(translateZ(0px) translateY(0px) rotateX(0deg));
+        @include opacity(1);
+    }
+}
+
+
+/* ---------- Fly ----------------------------------------------------------- */
+
+.animate--fly {
+    @include animate(fly, 0.8s, ease-in-out, 1, normal);
+}
+
+@include keyframes(fly) {
+    from {
+        @include transform-style(preserve-3d);
+        @include transform-origin(50%, 50%, -300px);
+        @include rotateX(-180deg);
+    }
+    to {
+        @include rotateX(0deg);
+        @include opacity(1);
+    }
+}
+
+
+/* ---------- Flip ---------------------------------------------------------- */
+
+.animate--flip {
+    @include animate(flip, 0.8s, ease-in-out, 1, normal);
+}
+
+@include keyframes(flip) {
+    from {
+        @include transform-style(preserve-3d);
+        @include transform-origin(0%, 0%);
+        @include transform(rotateX(-80deg));
+    }
+    to {
+        @include transform(rotateX(0deg));
+        @include opacity(1);
+    }
+}
+
+
+/* ---------- Helix --------------------------------------------------------- */
+
+.animate--helix {
+    @include animate(helix, 0.8s, ease-in-out, 1, normal);
+}
+
+@include keyframes(helix) {
+    from {
+        @include transform-style(preserve-3d);
+        @include rotateY(-180deg);
+    }
+    to {
+        @include rotateY(0deg);
+        @include opacity(1);
+    }
+}
+
+
+/* ---------- FullHouse ----------------------------------------------------- */
+
+.animate--fullhouse {
+    @include animate(fullhouse, 0.8s, ease-in, 1, normal);
+}
+
+@include keyframes(fullhouse) {
+    0% {
+        @include transform-style(preserve-3d);
+        @include scale(0.4);
+    }
+    70% {
+        @include scale(1.1);
+        @include opacity(0.8);
+        -webkit-animation-timing-function: ease-out;
+    }
+    100% {
+        @include scale(1);
+        @include opacity(1);
+    }
+}

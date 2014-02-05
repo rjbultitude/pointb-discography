@@ -1,0 +1,36 @@
+/**
+* Images -- part of the Generic Namespace
+*
+* $author       Dominic da Costa @ Zone
+* $email        ddacosta@thisiszone.com
+* $url          http://www.thisiszone.com/
+* $copyright    Copyright (c) 2012, thisiszone.com. All rights reserved.
+* $version      1.0
+*/
+
+img {
+    max-width: 100%;
+    height: auto;
+    &.right {
+        float: right;
+        margin-bottom: 8px;
+        margin-right: 16px;
+    }
+    &.left {
+        float: left;
+        margin-right: 16px;
+    }
+    &.center {
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+figure,
+.image {
+    figcaption, a, img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+}

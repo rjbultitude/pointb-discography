@@ -1,0 +1,71 @@
+/* -------------------------------------------------------------------------------- */
+/* ---------- Form, Fieldsets, Legends & labels ----------------------------------- */
+/* -------------------------------------------------------------------------------- */
+
+form {
+    margin:0;
+}
+
+fieldset {
+    margin-bottom: $spacing;
+}
+
+legend {
+    display: none;
+}
+
+label {
+    display: inline-block;
+    margin-right: $spacing;
+}
+
+label span,legend span {
+    color: $color-text;
+}
+
+.no-js .ie7 label,
+.no-js .ie8 label {
+    display: block !important;
+}
+
+/* -------------------------------------------------------------------------------- */
+/* ---------- Input --------------------------------------------------------------- */
+/* -------------------------------------------------------------------------------- */
+
+[type="submit"],
+[type="button"],
+button {
+    -webkit-appearance: none;
+    width: auto;
+    border: none;
+    background: none;
+    cursor: pointer;
+    @include standard-transistion;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+select,
+textarea {
+    -webkit-appearance: none;
+    border: 3px solid transparent;
+    padding: 0.25em 0.75em;
+    line-height: 1.333em;
+    outline: none;
+    color: $color-text;
+    margin: 0 0 $spacing;
+    max-width: 100%;
+    background: white;
+    display: inline-block;
+    @include standard-transistion;
+    &:hover,
+    &:focus,
+    &:active {
+        border-color: $color-text;
+    }
+    &.small {
+        width: 20%;
+    }
+}

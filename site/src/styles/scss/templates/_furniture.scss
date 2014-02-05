@@ -1,0 +1,120 @@
+/* -------------------------------------------------------------------------------- */
+/* ---------- Layout -------------------------------------------------------------- */
+/* -------------------------------------------------------------------------------- */
+
+html {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    // height: 100%;
+    // overflow-x: hidden;
+    padding: 0;
+    margin: 0;
+    background: $color-grey-l;
+}
+
+#page-wrapper {
+    min-height: 100%;
+}
+
+#header,
+#footer,
+#main {
+    display: block;
+    margin: 0 auto;
+    @include clearfix;
+}
+
+#header a {
+    color: $color-orange;
+}
+
+.section {
+    padding: $spacing 0;
+}
+
+.sub-section-wrapper .sub-section {
+    margin-bottom: $spacing-vertical;
+}
+
+.sub-section-wrapper .sub-section:last-child {
+    margin-bottom: 0;
+}
+
+.sub-section {
+    @media all and (max-width:$bp-medium) {
+        margin-bottom: $spacing-vertical;
+    }
+}
+
+.sub-section:last-child {
+    @media all and (max-width:$bp-medium) {
+        margin-bottom: 0;
+    }
+}
+
+.inner-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    @include clearfix;
+}
+
+/* -------------------------------------------------------------------------------- */
+/* ---------- Accessibility controls ---------------------------------------------- */
+/* -------------------------------------------------------------------------------- */
+.nav-skip {
+    display: block;
+    position: absolute;
+    left: -999em;
+    top: 0;
+    &:focus,
+    &:active {
+        left: $spacing;
+        outline: 0;
+        display: block;
+        padding: $spacing / 2;
+        background: white;
+        z-index: 10;
+    }
+}
+
+
+/* -------------------------------------------------------------------------------- */
+/* ---------- Header -------------------------------------------------------------- */
+/* -------------------------------------------------------------------------------- */
+
+#header {
+    padding: 0.750em $site-padding;
+    background: $color-grey-m;
+    color: white;
+}
+
+/* -------------------------------------------------------------------------------- */
+/* ---------- Logo ---------------------------------------------------------------- */
+/* -------------------------------------------------------------------------------- */
+.logo svg {
+    width: 12.500em;
+}
+
+.logo {
+    float: left;
+}
+
+.logo svg path {
+    fill:$color-orange;
+}
+
+/* -------------------------------------------------------------------------------- */
+/* ---------- Footer -------------------------------------------------------------- */
+/* -------------------------------------------------------------------------------- */
+
+#footer {
+    background: $color-dark-blue;
+    color: white;
+    padding:$spacing 0;
+    position:fixed;
+    width: 100%;
+    bottom:0px;
+}

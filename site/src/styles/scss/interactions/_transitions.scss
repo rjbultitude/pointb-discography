@@ -1,0 +1,11 @@
+.open-trans {
+    overflow:hidden;
+    @include ceaser-transition(height, 500ms, $easeInCirc, 0s);
+    //max-height: 1%;
+}
+
+.closed-trans {
+    overflow:hidden;
+    @include ceaser-transition(height, 500ms, $easeInCirc, 0s);
+    //max-height: 0;
+}
