@@ -21,6 +21,7 @@ define(['debug', 'loadData', 'createDrawGraph'], function(debug, loadDataModule,
 			var oldData = jsonData;
 			var newData = [];
 			var uniqueYears = [];
+			var uniqueFormats = [];
 
 			//get unique years
 			for (var i = 0; i < oldData.length; i++) {
@@ -49,10 +50,17 @@ define(['debug', 'loadData', 'createDrawGraph'], function(debug, loadDataModule,
 				}
 			}
 
-			//debug.log('newData', newData);
+			//get unique formats
+			for (var i = 0; i < oldData.length; i++) {
+				if (uniqueFormats.indexOf(oldData[i].Format) === -1) {
+					uniqueFormats.push(oldData[i].Format);
+				}
+			}
+
+			debug.log('uniqueFormats', uniqueFormats);
 
 			//swap this for newData when ready
-			createDrawGraph.getData(newData, uniqueYears);
+			createDrawGraph.getData(newData, uniqueYears, uniqueFormats);
 		}
 	};
 

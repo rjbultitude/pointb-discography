@@ -4,16 +4,28 @@
 		"selected_items":
 		[
 			[
+				"rel",
+				"release"
+			],
+			[
+				"new",
+				"newData"
+			],
+			[
+				"get",
+				"getUniqueYears"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
 				"form",
 				"formatNumbers"
 			],
 			[
 				"fom",
 				"format_number"
-			],
-			[
-				"get",
-				"get_years"
 			],
 			[
 				"l",
@@ -36,10 +48,10 @@
 	"buffers":
 	[
 		{
-			"file": "index.html",
+			"file": "pointb-discography.sublime-project",
 			"settings":
 			{
-				"buffer_size": 1542,
+				"buffer_size": 45,
 				"line_ending": "Unix"
 			}
 		}
@@ -75,7 +87,10 @@
 	},
 	"console":
 	{
-		"height": 125.0
+		"height": 125.0,
+		"history":
+		[
+		]
 	},
 	"distraction_free":
 	{
@@ -88,6 +103,12 @@
 	},
 	"file_history":
 	[
+		"/Users/rbultitude/Documents/web-dev/pointb-discography/site/src/scripts/modules/structure-data.js",
+		"/Users/rbultitude/Documents/web-dev/pointb-discography/site/data/discog-data.json",
+		"/Users/rbultitude/Documents/web-dev/pointb-discography/site/src/scripts/modules/load-data.js",
+		"/Users/rbultitude/Documents/web-dev/pointb-discography/site/src/scripts/config.js",
+		"/Users/rbultitude/Documents/web-dev/pointb-discography/site/src/scripts/modules/draw-graph.js",
+		"/Users/rbultitude/Documents/web-dev/pointb-discography/site/index.html",
 		"/Users/rbultitude/Documents/web-dev/pointb-discography/site/scripts/script.js",
 		"/Users/rbultitude/Documents/web-dev/pointb-discography/site/scripts/main.js",
 		"/Users/rbultitude/Documents/web-dev/pointb-discography/site/pointb-discography.sublime-project",
@@ -146,6 +167,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"tesco_data",
+			"Year",
+			"myArr",
+			"newData",
+			"getDataAjax",
 			"color_format",
 			"createSVG",
 			"drawGraph",
@@ -197,29 +223,30 @@
 			[
 				{
 					"buffer": 0,
-					"file": "index.html",
+					"file": "pointb-discography.sublime-project",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1542,
+						"buffer_size": 45,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1203,
-								1203
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -256,6 +283,15 @@
 		]
 	},
 	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 100.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "pointb-discography.sublime-project",
 	"replace":
 	{
 		"height": 0.0
@@ -277,10 +313,24 @@
 		],
 		"width": 380.0
 	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
 	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
 	"side_bar_width": 247.0,
-	"status_bar_visible": true
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
 }

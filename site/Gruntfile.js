@@ -57,7 +57,7 @@ module.exports = function(grunt) {
                 '!src/scripts/script.js',
                 '!src/scripts/libs/*.js',
                 '!src/scripts/*.min.js',
-                '!src/scripts/modernizr-custom.js'
+                '!src/scripts/modernizr.js'
             ]
         },
 
@@ -85,8 +85,8 @@ module.exports = function(grunt) {
         },
 
         modernizr: {
-            'devFile': 'src/scripts/libs/modernizr.js',
-            'outputFile': 'dist/scripts/modernizr-custom.js',
+            'devFile': 'src/scripts/modernizr.js',
+            'outputFile': 'dist/scripts/modernizr.js',
             'extra': {
                 'shiv': true,
                 'printshiv': false,

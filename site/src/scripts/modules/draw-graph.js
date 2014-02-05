@@ -1,10 +1,10 @@
 /**
- * Example module module
+ * Draw graph module
  *
- * $author       Zone dev
- * $email        frontend@thisiszone.com
- * $url          http://www.thisiszone.com/
- * $copyright    Copyright (c) 2013, thisiszone.com. All rights reserved.
+ * $author       Richard Bultitude
+ * $email        richard.bultitude@gmail.com
+ * $url          http://www.point-b.co.uk
+ * $copyright    Copyright (c) 2014, point-b.co.uk. All rights reserved.
  * $version      1.0
  *
  * $notes        Notes
@@ -17,14 +17,15 @@ define(['debug', 'd3', 'structureData'], function(debug, d3, structureData) {
 
 	//Variables
 	var discogData = [];
-	var allFormats = [];
-	var allColours = ['#C16620', '#E8A54E', '#385559', '#202C38', '#A58576'];
 	var uniqueYears = [];
+	var uniqueFormats = [];
+	var allColours = ['#C16620', '#E8A54E', '#385559', '#202C38', '#A58576'];
 	var maxReleases = null;
 	var numberYears = null;
 	var formatxAxis = null;
-	var w = 980;
-	var h = 800;
+	var releaseSize = 0;
+	var w = 800;
+	var h = 500;
 	var padding = 100;
 	var colorFormat = null;
 	var xscale = null;
@@ -35,19 +36,21 @@ define(['debug', 'd3', 'structureData'], function(debug, d3, structureData) {
 
 	var createDrawGraph = {
 
-		getData: function getDataFn(data, uniqueYears) {
+		getData: function getDataFn(data, uniqueYears, uniqueFormats) {
 			discogData = data;
 			uniqueYears = uniqueYears;
+			uniqueFormats = uniqueFormats;
 			createDrawGraph.setColorFormat();
 			createDrawGraph.calcReleases();
 			createDrawGraph.formatXAxis();
 			createDrawGraph.getYears();
+			createDrawGraph.setReleaseSize();
 
 			debug.log('discogData', discogData);
 		},
 
 		setColorFormat: function setColorFormat() {
-			colorFormat = d3.scale.ordinal().domain(allFormats).range(allColours);
+			colorFormat = d3.scale.ordinal().domain(uniqueFormats).range(allColours);
 		},
 
 		//Get max number of releases in year
@@ -70,6 +73,11 @@ define(['debug', 'd3', 'structureData'], function(debug, d3, structureData) {
 		//Get unique years
 		getYears: function getYearsFn(){
 			numberYears = discogData.length;
+		},
+
+		setReleaseSize: function setReleaseSize() {
+			releaseSize = h / maxReleases;
+			debug.log(releaseSize);
 			createDrawGraph.setScales();
 		},
 
@@ -113,7 +121,7 @@ define(['debug', 'd3', 'structureData'], function(debug, d3, structureData) {
 		},
 
 		drawGraph: function drawGraph(dataObject) {
-
+			debug.log('format?', dataObject[0].releases[0].Format);
 			//remove any existing rectangles
 			svg.selectAll('rect').remove();
 
@@ -126,15 +134,14 @@ define(['debug', 'd3', 'structureData'], function(debug, d3, structureData) {
 				.delay(0)
 				.duration(3000)
 				.attr('x', function(d) {
-					return xscale(d.Year);
+					return xscale(d.year);
 				})
-				.attr('y', padding)
-				.attr('height', maxReleases)
-				.attr('width', (w - padding * 4) / numberYears)
+				.attr('y', 0 + padding)
+				.attr('height', releaseSize)
+				.attr('width', (w - padding * 3) / numberYears)
 				.attr('fill', function(d) {
-					return colorFormat(d.format);
+					return colorFormat(d.releases[0].Format);
 				});
-
 		},
 
 		init: function initFn() {
