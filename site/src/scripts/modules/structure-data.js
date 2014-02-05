@@ -29,7 +29,7 @@ define(['debug', 'loadData', 'createDrawGraph'], function(debug, loadDataModule,
 				}
 			}
 			uniqueYears.sort();
-			debug.log('uniqueYears', uniqueYears);
+			//debug.log('uniqueYears', uniqueYears);
 
 			//Create object for each year and add to newData
 			for (var j=0; j < uniqueYears.length; j++) {
@@ -49,10 +49,10 @@ define(['debug', 'loadData', 'createDrawGraph'], function(debug, loadDataModule,
 				}
 			}
 
-			debug.log('newData', newData);
+			//debug.log('newData', newData);
 
 			//swap this for newData when ready
-			createDrawGraph.getData(oldData);
+			createDrawGraph.getData(newData, uniqueYears);
 		}
 	};
 
