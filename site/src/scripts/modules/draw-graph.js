@@ -26,7 +26,7 @@ define(['debug', 'd3', 'structureData'], function(debug, d3, structureData) {
 	var releaseSize = 0;
 	var w = 800;
 	var h = 600;
-	var padding = 100;
+	var padding = 40;
 	var colorFormat = null;
 	var xscale = null;
 	var yscale = null;
@@ -76,8 +76,7 @@ define(['debug', 'd3', 'structureData'], function(debug, d3, structureData) {
 		},
 
 		setReleaseSize: function setReleaseSize() {
-			releaseSize = h / maxReleases;
-			debug.log(releaseSize);
+			releaseSize = (h - padding*2) / maxReleases;
 			createDrawGraph.setScales();
 		},
 
@@ -140,9 +139,9 @@ define(['debug', 'd3', 'structureData'], function(debug, d3, structureData) {
 			.transition()
 			.delay(0)
 			.duration(3000)
-			.attr('width', (w - padding * 3) / numberYears)
+			.attr('width', (w - padding*2) / numberYears)
 			.attr('y', function(d, i){
-				return releaseSize * i + i;
+				return releaseSize * i + i + padding;
 			})
 			.attr('height', releaseSize)
 			.style('fill', function(d){
