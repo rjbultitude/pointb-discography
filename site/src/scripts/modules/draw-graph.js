@@ -25,7 +25,7 @@ define(['debug', 'd3', 'structureData'], function(debug, d3, structureData) {
 	var formatxAxis = null;
 	var releaseSize = 0;
 	var w = 800;
-	var h = 500;
+	var h = 600;
 	var padding = 100;
 	var colorFormat = null;
 	var xscale = null;
@@ -121,27 +121,33 @@ define(['debug', 'd3', 'structureData'], function(debug, d3, structureData) {
 		},
 
 		drawGraph: function drawGraph(dataObject) {
-			debug.log('format?', dataObject[0].releases[0].Format);
+			//debug.log('format?', dataObject[0].releases[0].Format);
 			//remove any existing rectangles
 			svg.selectAll('rect').remove();
 
-			//bind data to blocks
-			svg.selectAll('rect')
-				.data(dataObject)
-				.enter()
-				.append('rect')
-				.transition()
-				.delay(0)
-				.duration(3000)
-				.attr('x', function(d) {
-					return xscale(d.year);
-				})
-				.attr('y', 0 + padding)
-				.attr('height', releaseSize)
-				.attr('width', (w - padding * 3) / numberYears)
-				.attr('fill', function(d) {
-					return colorFormat(d.releases[0].Format);
-				});
+			//create columns
+			var yearColumn = svg.selectAll('.year')
+			.data(dataObject)
+			.enter().append('g')
+			.attr('class', 'g')
+			.attr('transform', function(d) { return 'translate(' + xscale(d.year) + ',0)'; });
+
+			yearColumn.selectAll('rect')
+			.data(function(d) { return d.releases; })
+			.enter()
+			.append('rect')
+			.attr('height', 0)
+			.transition()
+			.delay(0)
+			.duration(3000)
+			.attr('width', (w - padding * 3) / numberYears)
+			.attr('y', function(d, i){
+				return releaseSize * i + i;
+			})
+			.attr('height', releaseSize)
+			.style('fill', function(d){
+				return colorFormat(d.Format);
+			});
 		},
 
 		init: function initFn() {
