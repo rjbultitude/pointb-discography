@@ -109,7 +109,7 @@ define(['debug', 'd3', 'structureData'], function(debug, d3, structureData) {
 		},
 
 		createAxis: function createAxisFn() {
-			svg.append('g').attr('class', 'axis').attr('transform', 'translate(0,' + (h - padding) + ')').call(xaxis);
+			svg.append('g').attr('class', 'axis').attr('transform', 'translate(0,' + (0 + padding) + ')').call(xaxis);
 			svg.append('g').attr('class', 'axis').attr('transform', 'translate(' + padding + ', 0)').call(yaxis);
 			// add axis labels
 			svg.append('text').attr('class', 'x-label').attr('text-anchor', 'middle').attr('x', (w / 2) - 30).attr('y', (h - padding / 2) + 10).text('Year');
@@ -143,7 +143,9 @@ define(['debug', 'd3', 'structureData'], function(debug, d3, structureData) {
 			.attr('y', function(d, i){
 				return releaseSize * i + i + padding;
 			})
-			.attr('height', releaseSize)
+			.attr('height', function(d, i) {
+				return releaseSize - i;
+			})
 			.style('fill', function(d){
 				return colorFormat(d.Format);
 			});
