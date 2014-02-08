@@ -44,12 +44,33 @@ define(['jquery'], function($) {
         },
 
         disableControlsHref: function disableControlsHrefFn() {
-            $('a[rel="prev"], a[rel="next"]').on('click', function(e){
+            $('a[rel="prev"], a[rel="next"]').on('click', function(e) {
                 e.preventDefault();
             });
+        },
+
+        shadeColor: function(color, percent) {
+
+            var R = parseInt(color.substring(1, 3), 16);
+            var G = parseInt(color.substring(3, 5), 16);
+            var B = parseInt(color.substring(5, 7), 16);
+
+            R = parseInt(R * (100 + percent) / 100, 16);
+            G = parseInt(G * (100 + percent) / 100, 16);
+            B = parseInt(B * (100 + percent) / 100, 16);
+
+            R = (R < 255) ? R : 255;
+            G = (G < 255) ? G : 255;
+            B = (B < 255) ? B : 255;
+
+            var rStr = (R.toString(16).length < 2) ? '0' + R.toString(16) : R.toString(16);
+            var gStr = (G.toString(16).length < 2) ? '0' + G.toString(16) : G.toString(16);
+            var bStr = (B.toString(16).length < 2) ? '0' + B.toString(16) : B.toString(16);
+
+            return ('#') + rStr + gStr + bStr;
         }
 
-    };//end base
+    }; //end base
 
     //IE selectivizr polyfill
     $(function() {

@@ -12,7 +12,7 @@
 
 var requireLocalized = requireLocalized || {};
 
-define(['debug', 'jquery', 'd3', 'structureData'], function(debug, $, d3, structureData) {
+define(['debug', 'jquery', 'd3', 'base', 'structureData'], function(debug, $, d3, base, structureData) {
 	'use strict';
 
 	//do i need unique years?
@@ -148,7 +148,7 @@ define(['debug', 'jquery', 'd3', 'structureData'], function(debug, $, d3, struct
 			.append('rect')
 			.on('click', function(d) {
 				var rect = d3.select(this);
-				rect.transition().delay(0).duration(500);
+				//var thisColour = d3.select('rect').style('fill');
 				$('.release-title').text(d.Title);
 				$('.release-label').text(d.Label);
 				$('.release-cat').text(d["Catalogue number"]);
