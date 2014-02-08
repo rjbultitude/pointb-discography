@@ -117,7 +117,7 @@ define(['debug', 'jquery', 'd3', 'structureData'], function(debug, $, d3, struct
 			xaxis = d3.svg.axis().ticks(yearRange).scale(xscale).orient('bottom').tickFormat(formatxAxis);
 			yaxis = d3.svg.axis().ticks(maxReleases).tickValues(maxReleases).scale(yscale).orient('left');
 
-			svg.append('g').attr('class', 'axis').attr('transform', 'translate(30,' + (padding/2) + ')').call(xaxis);
+			svg.append('g').attr('class', 'axis').attr('transform', 'translate(35,' + (padding/2) + ')').call(xaxis);
 			//svg.append('g').attr('class', 'axis').attr('transform', 'translate(' + padding + ', 0)').call(yaxis);
 
 			//call function
@@ -146,12 +146,22 @@ define(['debug', 'jquery', 'd3', 'structureData'], function(debug, $, d3, struct
 			.data(function(d) { return d.releases; })
 			.enter()
 			.append('rect')
-			.on('click', function(d, i) {
+			.on('click', function(d) {
 				var rect = d3.select(this);
 				rect.transition().delay(0).duration(500);
 				$('.release-title').text(d.Title);
 				$('.release-label').text(d.Label);
 				$('.release-cat').text(d["Catalogue number"]);
+			})
+			.on('mouseenter', function(d) {
+				var rect = d3.select(this);
+				rect.style('fill', '#ffffff');
+			})
+			.on('mouseleave', function(d) {
+				var rect = d3.select(this);
+				rect.style('fill', function(d){
+					return colorFormat(d.Format);
+				})
 			})
 			.attr('height', 0)
 			.transition()
