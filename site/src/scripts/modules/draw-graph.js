@@ -12,20 +12,22 @@
 
 var requireLocalized = requireLocalized || {};
 
-define(['debug', 'd3', 'structureData'], function(debug, d3, structureData) {
+define(['debug', 'jquery', 'd3', 'structureData'], function(debug, $, d3, structureData) {
 	'use strict';
+
+	//do i need unique years?
 
 	//Variables
 	var discogData = [];
-	var uniqueYears = [];
-	var uniqueFormats = [];
+	var uniqueYearsData = [];
+	var uniqueFormatsData = [];
 	var allColours = ['#C16620', '#E8A54E', '#385559', '#202C38', '#A58576'];
 	var maxReleases = null;
 	var numberYears = null;
 	var formatxAxis = null;
 	var releaseSize = 0;
 	var w = 800;
-	var h = 600;
+	var h = 400;
 	var padding = 40;
 	var colorFormat = null;
 	var xscale = null;
@@ -38,19 +40,22 @@ define(['debug', 'd3', 'structureData'], function(debug, d3, structureData) {
 
 		getData: function getDataFn(data, uniqueYears, uniqueFormats) {
 			discogData = data;
-			uniqueYears = uniqueYears;
-			uniqueFormats = uniqueFormats;
+			uniqueYearsData = uniqueYears;
+			uniqueFormatsData = uniqueFormats;
 			createDrawGraph.setColorFormat();
 			createDrawGraph.calcReleases();
 			createDrawGraph.formatXAxis();
 			createDrawGraph.getYears();
 			createDrawGraph.setReleaseSize();
+			createDrawGraph.createKey();
 
 			debug.log('discogData', discogData);
+
+			return uniqueFormats;
 		},
 
 		setColorFormat: function setColorFormat() {
-			colorFormat = d3.scale.ordinal().domain(uniqueFormats).range(allColours);
+			colorFormat = d3.scale.ordinal().domain(uniqueFormatsData).range(allColours);
 		},
 
 		//Get max number of releases in year
@@ -63,7 +68,6 @@ define(['debug', 'd3', 'structureData'], function(debug, d3, structureData) {
 					maxReleases = discogData[i].releases.length;
 				}
 			}
-			//debug.log('maxReleases', maxReleases);
 		},
 
 		formatXAxis: function formatXAxisFn() {
@@ -85,14 +89,12 @@ define(['debug', 'd3', 'structureData'], function(debug, d3, structureData) {
 				return d.year;
 			}), d3.max(discogData, function(d) {
 				return d.year;
-			})]).rangeRound([padding, (w) - padding]);
+			})]).rangeRound([0, (w) - padding*2]);
 			yscale = d3.scale.linear().domain([d3.min(maxReleases, function(d) {
 				return d;
 			}), d3.max(maxReleases, function(d) {
 				return d;
 			})]).rangeRound([(h) - padding, padding]);
-			xaxis = d3.svg.axis().ticks(uniqueYears.length).scale(xscale).orient('bottom').tickFormat(formatxAxis);
-			yaxis = d3.svg.axis().tickValues(maxReleases).scale(yscale).orient('left');
 
 			//call function
 			createDrawGraph.createSVG();
@@ -109,18 +111,30 @@ define(['debug', 'd3', 'structureData'], function(debug, d3, structureData) {
 		},
 
 		createAxis: function createAxisFn() {
-			svg.append('g').attr('class', 'axis').attr('transform', 'translate(0,' + (0 + padding) + ')').call(xaxis);
-			svg.append('g').attr('class', 'axis').attr('transform', 'translate(' + padding + ', 0)').call(yaxis);
+
+			var yearRange = discogData.length;
+
+			xaxis = d3.svg.axis().ticks(yearRange).scale(xscale).orient('bottom').tickFormat(formatxAxis);
+			yaxis = d3.svg.axis().ticks(maxReleases).tickValues(maxReleases).scale(yscale).orient('left');
+
+			svg.append('g').attr('class', 'axis').attr('transform', 'translate(30,' + (padding/2) + ')').call(xaxis);
+			//svg.append('g').attr('class', 'axis').attr('transform', 'translate(' + padding + ', 0)').call(yaxis);
 			// add axis labels
-			svg.append('text').attr('class', 'x-label').attr('text-anchor', 'middle').attr('x', (w / 2) - 30).attr('y', (h - padding / 2) + 10).text('Year');
-			svg.append('text').attr('class', 'y-label').attr('text-anchor', 'middle').attr('y', (padding / 2) - 10).attr('x', -h / 2).attr('transform', 'rotate(-90)').text('Releases');
+			svg.append('text').attr('class', 'x-label').attr('text-anchor', 'top').attr('x', (w / 2) - 30).attr('y', padding/2).text('Year');
+			//svg.append('text').attr('class', 'y-label').attr('text-anchor', 'middle').attr('y', (padding / 2) - 10).attr('x', -h / 2).attr('transform', 'rotate(-90)').text('Releases');
 
 			//call function
 			createDrawGraph.drawGraph(discogData);
 		},
 
+		createKey: function createKeyFn() {
+			for (var i = 0; i < allColours.length; i++) {
+				$('#key-list').append('<dd style="background-color:' +  allColours[i] + '">&nbsp</dd>');
+				$('#key-list').append('<dt>' +  uniqueFormatsData[i] + '</dt>');
+			}
+		},
+
 		drawGraph: function drawGraph(dataObject) {
-			//debug.log('format?', dataObject[0].releases[0].Format);
 			//remove any existing rectangles
 			svg.selectAll('rect').remove();
 
@@ -129,12 +143,22 @@ define(['debug', 'd3', 'structureData'], function(debug, d3, structureData) {
 			.data(dataObject)
 			.enter().append('g')
 			.attr('class', 'g')
-			.attr('transform', function(d) { return 'translate(' + xscale(d.year) + ',0)'; });
+			.attr('transform', function(d) { return 'translate(' + xscale(d.year) + ',10)'; });
 
 			yearColumn.selectAll('rect')
 			.data(function(d) { return d.releases; })
 			.enter()
 			.append('rect')
+			.on('mouseover', function(d, i) {
+				var rect = d3.select(this);
+				rect.transition().delay(0).duration(500);
+				d3.select('.infobox').style('opacity', '1').text(d.Title);
+			})
+			.on('mouseout', function(d){
+				var rect = d3.select(this);
+				rect.transition().delay(0).duration(500);
+				d3.select('.infobox').style('opacity', '0');
+			})
 			.attr('height', 0)
 			.transition()
 			.delay(0)
