@@ -1,3 +1,8 @@
+.section-release-details {
+	width:100%;
+	float:left;
+}
+
 .axis .domain {
   fill: none;
   stroke: none;
@@ -16,4 +21,5 @@
 
 .column rect {
 	stroke: white;
+	cursor:pointer;
 }

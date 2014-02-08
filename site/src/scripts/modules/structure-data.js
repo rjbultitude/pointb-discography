@@ -57,9 +57,6 @@ define(['debug', 'loadData', 'createDrawGraph'], function(debug, loadDataModule,
 				}
 			}
 
-			debug.log('uniqueFormats', uniqueFormats);
-
-			//swap this for newData when ready
 			createDrawGraph.getData(newData, uniqueYears, uniqueFormats);
 		}
 	};

@@ -962,27 +962,34 @@ body {
 }
 
 /* line 1, ../scss/templates/_discog.scss */
+.section-release-details {
+  width: 100%;
+  float: left;
+}
+
+/* line 6, ../scss/templates/_discog.scss */
 .axis .domain {
   fill: none;
   stroke: none;
   shape-rendering: crispEdges;
 }
 
-/* line 7, ../scss/templates/_discog.scss */
+/* line 12, ../scss/templates/_discog.scss */
 .infobox {
   color: black;
   font-size: 1.2em;
 }
 
-/* line 12, ../scss/templates/_discog.scss */
+/* line 17, ../scss/templates/_discog.scss */
 .column {
   min-height: 10em;
   background: white;
 }
 
-/* line 17, ../scss/templates/_discog.scss */
+/* line 22, ../scss/templates/_discog.scss */
 .column rect {
   stroke: white;
+  cursor: pointer;
 }
 
 /* -------------------------------------------------------------------------------- */

@@ -146,15 +146,12 @@ define(['debug', 'jquery', 'd3', 'structureData'], function(debug, $, d3, struct
 			.data(function(d) { return d.releases; })
 			.enter()
 			.append('rect')
-			.on('mouseover', function(d, i) {
+			.on('click', function(d, i) {
 				var rect = d3.select(this);
 				rect.transition().delay(0).duration(500);
-				d3.select('.infobox').style('opacity', '1').text(d.Title);
-			})
-			.on('mouseout', function(d){
-				var rect = d3.select(this);
-				rect.transition().delay(0).duration(500);
-				d3.select('.infobox').style('opacity', '0');
+				$('.release-title').text(d.Title);
+				$('.release-label').text(d.Label);
+				$('.release-cat').text(d["Catalogue number"]);
 			})
 			.attr('height', 0)
 			.transition()
