@@ -148,10 +148,11 @@ define(['debug', 'jquery', 'd3', 'base', 'structureData'], function(debug, $, d3
 			.append('rect')
 			.on('click', function(d) {
 				var rect = d3.select(this);
-				//var thisColour = d3.select('rect').style('fill');
+				var thisColour = d3.select('rect').style('fill');
 				$('.release-title').text(d.Title);
 				$('.release-label').text(d.Label);
 				$('.release-cat').text(d["Catalogue number"]);
+				rect.style('fill', base.colorLuminance(thisColour, 0.5));
 			})
 			.on('mouseenter', function(d) {
 				var rect = d3.select(this);
