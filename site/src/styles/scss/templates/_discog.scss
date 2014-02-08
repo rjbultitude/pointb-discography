@@ -8,3 +8,12 @@
     color:black;
     font-size:1.2em;
 }
+
+.column {
+	min-height:10em;
+	background:white;
+}
+
+.column rect {
+	stroke: white;
+}

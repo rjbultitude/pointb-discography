@@ -582,15 +582,18 @@ li:last-of-type {
 }
 
 /* line 27, ../scss/generic/_lists.scss */
-dd, dt {
+dt, dd {
   display: block;
   float: left;
-  min-width: 5em;
+  min-width: 2.8em;
+  min-height: 1.2em;
+  text-align: left;
 }
 
-/* line 33, ../scss/generic/_lists.scss */
-dd {
+/* line 35, ../scss/generic/_lists.scss */
+dt {
   clear: left;
+  margin-bottom: 0.2em;
 }
 
 /* line 2, ../scss/generic/_buttons.scss */
@@ -969,6 +972,17 @@ body {
 .infobox {
   color: black;
   font-size: 1.2em;
+}
+
+/* line 12, ../scss/templates/_discog.scss */
+.column {
+  min-height: 10em;
+  background: white;
+}
+
+/* line 17, ../scss/templates/_discog.scss */
+.column rect {
+  stroke: white;
 }
 
 /* -------------------------------------------------------------------------------- */

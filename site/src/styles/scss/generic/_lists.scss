@@ -24,12 +24,15 @@ li:last-of-type {
     margin-bottom: 0;
 }
 
-dd, dt {
+dt, dd {
 	display:block;
 	float:left;
-	min-width:5em;
+	min-width:2.8em;
+    min-height:1.2em;
+    text-align:left;
 }
 
-dd {
+dt {
 	clear:left;
+    margin-bottom:0.2em;
 }

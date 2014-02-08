@@ -89,7 +89,7 @@ define(['debug', 'jquery', 'd3', 'structureData'], function(debug, $, d3, struct
 				return d.year;
 			}), d3.max(discogData, function(d) {
 				return d.year;
-			})]).rangeRound([0, (w) - padding*2]);
+			})]).rangeRound([0, w - (padding*4) + 25]);
 			yscale = d3.scale.linear().domain([d3.min(maxReleases, function(d) {
 				return d;
 			}), d3.max(maxReleases, function(d) {
@@ -119,9 +119,6 @@ define(['debug', 'jquery', 'd3', 'structureData'], function(debug, $, d3, struct
 
 			svg.append('g').attr('class', 'axis').attr('transform', 'translate(30,' + (padding/2) + ')').call(xaxis);
 			//svg.append('g').attr('class', 'axis').attr('transform', 'translate(' + padding + ', 0)').call(yaxis);
-			// add axis labels
-			svg.append('text').attr('class', 'x-label').attr('text-anchor', 'top').attr('x', (w / 2) - 30).attr('y', padding/2).text('Year');
-			//svg.append('text').attr('class', 'y-label').attr('text-anchor', 'middle').attr('y', (padding / 2) - 10).attr('x', -h / 2).attr('transform', 'rotate(-90)').text('Releases');
 
 			//call function
 			createDrawGraph.drawGraph(discogData);
@@ -129,8 +126,8 @@ define(['debug', 'jquery', 'd3', 'structureData'], function(debug, $, d3, struct
 
 		createKey: function createKeyFn() {
 			for (var i = 0; i < allColours.length; i++) {
-				$('#key-list').append('<dd style="background-color:' +  allColours[i] + '">&nbsp</dd>');
-				$('#key-list').append('<dt>' +  uniqueFormatsData[i] + '</dt>');
+				$('#key-list').append('<dt style="background-color:' +  allColours[i] + '">&nbsp</dt>');
+				$('#key-list').append('<dd>' +  uniqueFormatsData[i] + '</dd>');
 			}
 		},
 
@@ -142,7 +139,7 @@ define(['debug', 'jquery', 'd3', 'structureData'], function(debug, $, d3, struct
 			var yearColumn = svg.selectAll('.year')
 			.data(dataObject)
 			.enter().append('g')
-			.attr('class', 'g')
+			.attr('class', 'column')
 			.attr('transform', function(d) { return 'translate(' + xscale(d.year) + ',10)'; });
 
 			yearColumn.selectAll('rect')
@@ -165,10 +162,10 @@ define(['debug', 'jquery', 'd3', 'structureData'], function(debug, $, d3, struct
 			.duration(3000)
 			.attr('width', (w - padding*2) / numberYears)
 			.attr('y', function(d, i){
-				return releaseSize * i + i + padding;
+				return releaseSize * i + padding;
 			})
-			.attr('height', function(d, i) {
-				return releaseSize - i;
+			.attr('height', function(d) {
+				return releaseSize;
 			})
 			.style('fill', function(d){
 				return colorFormat(d.Format);
