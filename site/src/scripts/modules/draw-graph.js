@@ -5,7 +5,7 @@
  * $email        richard.bultitude@gmail.com
  * $url          http://www.point-b.co.uk
  * $copyright    Copyright (c) 2014, point-b.co.uk. All rights reserved.
- * $version      1.0
+ * $version      1.2
  *
  * $notes        Notes
  */
