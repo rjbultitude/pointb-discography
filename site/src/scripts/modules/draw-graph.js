@@ -150,6 +150,7 @@ define(['debug', 'jquery', 'd3', 'base', 'structureData'], function(debug, $, d3
 				$('.release-title').text(d.Title);
 				$('.release-label').text(d.Label);
 				$('.release-cat').text(d["Catalogue number"]);
+				$('.release-image').attr('src', d.ReleaseImage);
 			})
 			.on('mouseenter', function(d) {
 				var rect = d3.select(this);

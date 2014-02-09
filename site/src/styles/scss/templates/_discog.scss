@@ -27,3 +27,18 @@
 .column rect.active {
 	fill:white;
 }
+
+.release-details-list {
+	float:left;
+	width:60%;
+}
+
+.release-figure {
+	float:right;
+	width:200px;
+}
+
+.release-figure .release-image {
+	max-width:100%;
+	height:auto;
+}
