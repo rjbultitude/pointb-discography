@@ -1,4 +1,6 @@
-[{"Title":"Don't Switch Off","Label":"Frijsfo Beats","Catalogue number":"SFO018","Year":2012,"Format":"Digital","Image":null},
+[
+{"Title":"Heart of Matter","Label":"Frijsfo Beats","Catalogue number":"SFO025","Year":2014,"Format":"Digital, CD","Image":null},
+{"Title":"Don't Switch Off","Label":"Frijsfo Beats","Catalogue number":"SFO018","Year":2012,"Format":"Digital","Image":null},
 {"Title":"The Veld","Label":"Frijsfo Beats","Catalogue number":"SFO016","Year":2012,"Format":"Digital","Image":null},
 {"Title":"The Established Order of Things","Label":"Frijsfo Beats","Catalogue number":"SFO013","Year":2011,"Format":"Digital","Image":null},
 {"Title":"Fossils","Label":"Frijsfo Beats","Catalogue number":"SFO012","Year":2011,"Format":"Digital","Image":null},
@@ -16,4 +18,5 @@
 {"Title":"Cutouts","Label":"SCSI Av","Catalogue number":"IDO020","Year":2006,"Format":"Vinyl","Image":null},
 {"Title":"After Burns","Label":"Erratica","Catalogue number":"ERR003","Year":2005,"Format":"Vinyl","Image":null},
 {"Title":"Fictionary","Label":"Orson","Catalogue number":"ORS003","Year":2004,"Format":"Vinyl","Image":null},
-{"Title":"Knowone","Label":"Erratica","Catalogue number":"ERR001","Year":2003,"Format":"Vinyl","Image":null}]
+{"Title":"Knowone","Label":"Erratica","Catalogue number":"ERR001","Year":2003,"Format":"Vinyl","Image":null}
+]

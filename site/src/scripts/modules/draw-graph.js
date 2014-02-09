@@ -89,7 +89,7 @@ define(['debug', 'jquery', 'd3', 'base', 'structureData'], function(debug, $, d3
 				return d.year;
 			}), d3.max(discogData, function(d) {
 				return d.year;
-			})]).rangeRound([0, w - (padding*4) + 25]);
+			})]).rangeRound([0, w - padding*2]);
 			yscale = d3.scale.linear().domain([d3.min(maxReleases, function(d) {
 				return d;
 			}), d3.max(maxReleases, function(d) {
@@ -117,7 +117,7 @@ define(['debug', 'jquery', 'd3', 'base', 'structureData'], function(debug, $, d3
 			xaxis = d3.svg.axis().ticks(yearRange).scale(xscale).orient('bottom').tickFormat(formatxAxis);
 			yaxis = d3.svg.axis().ticks(maxReleases).tickValues(maxReleases).scale(yscale).orient('left');
 
-			svg.append('g').attr('class', 'axis').attr('transform', 'translate(35,' + (padding/2) + ')').call(xaxis);
+			svg.append('g').attr('class', 'axis').attr('transform', 'translate(32,' + (padding/2) + ')').call(xaxis);
 			//svg.append('g').attr('class', 'axis').attr('transform', 'translate(' + padding + ', 0)').call(yaxis);
 
 			//call function
