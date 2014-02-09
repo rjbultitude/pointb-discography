@@ -147,16 +147,14 @@ define(['debug', 'jquery', 'd3', 'base', 'structureData'], function(debug, $, d3
 			.enter()
 			.append('rect')
 			.on('click', function(d) {
-				var rect = d3.select(this);
-				var thisColour = d3.select('rect').style('fill');
 				$('.release-title').text(d.Title);
 				$('.release-label').text(d.Label);
 				$('.release-cat').text(d["Catalogue number"]);
-				rect.style('fill', base.colorLuminance(thisColour, 0.5));
 			})
 			.on('mouseenter', function(d) {
 				var rect = d3.select(this);
-				rect.style('fill', '#ffffff');
+				var thisColour = colorFormat(d.Format);
+				rect.style('fill', base.colorLuminance(thisColour, 0.5));
 			})
 			.on('mouseleave', function(d) {
 				var rect = d3.select(this);
