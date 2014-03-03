@@ -85,24 +85,26 @@ module.exports = function(grunt) {
         },
 
         modernizr: {
-            'devFile': 'src/scripts/modernizr.js',
-            'outputFile': 'dist/scripts/modernizr.js',
-            'extra': {
-                'shiv': true,
-                'printshiv': false,
-                'load': true,
-                'mq': false,
-                'cssclasses': true
-            },
-            'extensibility': {
-                'addtest': false,
-                'prefixed': false,
-                'teststyles': false,
-                'testprops': false,
-                'testallprops': false,
-                'hasevents': false,
-                'prefixes': false,
-                'domprefixes': false
+            dist: {
+                'devFile': 'src/scripts/modernizr.js',
+                'outputFile': 'dist/scripts/modernizr.js',
+                'extra': {
+                    'shiv': true,
+                    'printshiv': false,
+                    'load': true,
+                    'mq': false,
+                    'cssclasses': true
+                },
+                'extensibility': {
+                    'addtest': false,
+                    'prefixed': false,
+                    'teststyles': false,
+                    'testprops': false,
+                    'testallprops': false,
+                    'hasevents': false,
+                    'prefixes': false,
+                    'domprefixes': false
+                }
             }
         },
 
