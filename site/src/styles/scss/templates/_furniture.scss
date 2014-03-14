@@ -19,18 +19,6 @@ body {
     min-height: 100%;
 }
 
-#header,
-#footer,
-#main {
-    display: block;
-    margin: 0 auto;
-    @include clearfix;
-}
-
-#header a {
-    color: $color-orange;
-}
-
 .section {
     padding: $spacing 0;
 }
@@ -89,6 +77,18 @@ body {
     padding: 0.750em $site-padding;
     background: $color-grey-m;
     color: white;
+}
+
+#header,
+#footer,
+#main {
+    display: block;
+    margin: 0 auto;
+    @include clearfix;
+}
+
+#header a {
+    color: $color-orange;
 }
 
 /* -------------------------------------------------------------------------------- */
